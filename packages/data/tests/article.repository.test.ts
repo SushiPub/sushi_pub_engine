@@ -1,6 +1,10 @@
-import { db } from '../src/db';
-import { insertArticle, findArticleBySlug } from '../src/article.repository';
+import { createDb } from '../src/db';
+import { createArticleRepository } from '../src/article.repository';
 import { createArticle } from '@socialpublisher/core';
+
+const db = createDb();
+const articlesRepo = createArticleRepository(db);
+
 
 beforeAll(async () => {
   await db.schema.dropTableIfExists('articles');
@@ -27,9 +31,9 @@ test('insert and read article', async () => {
     body: 'Stored in postgres',
   });
 
-  await insertArticle(article);
+  await articlesRepo.insert(article);
 
-  const result = await findArticleBySlug('db-test');
+  const result = await articlesRepo.findBySlug('db-test');
 
   expect(result).not.toBeNull();
   expect(result?.title).toBe('DB Test');
