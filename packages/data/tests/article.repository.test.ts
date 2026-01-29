@@ -1,3 +1,5 @@
+import '../src/bootstrap';
+
 import { createDb } from '../src/db';
 import { createArticleRepository } from '../src/article.repository';
 import { createArticle } from '@socialpublisher/core';
@@ -5,18 +7,14 @@ import { createArticle } from '@socialpublisher/core';
 const db = createDb();
 const articlesRepo = createArticleRepository(db);
 
-
 beforeAll(async () => {
-  await db.schema.dropTableIfExists('articles');
-  await db.schema.createTable('articles', (t) => {
-    t.uuid('id').primary();
-    t.text('title');
-    t.text('slug').unique();
-    t.text('body');
-    t.text('status');
-    t.timestamp('created_at');
-    t.timestamp('updated_at');
-  });
+  // ✅ Ensure schema exists (via migrations)
+  await db.migrate.latest();
+});
+
+beforeEach(async () => {
+  // ✅ Clean data only (safe, fast)
+  await db('articles').truncate();
 });
 
 afterAll(async () => {
