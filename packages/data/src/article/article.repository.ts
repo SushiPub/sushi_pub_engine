@@ -1,6 +1,13 @@
 import { Knex } from 'knex';
 import { Article } from '@socialpublisher/core';
 
+export interface ArticleRepository {
+  insert(article: Article): Promise<void>;
+  findBySlug(slug: string): Promise<Article | null>;
+  findById(id: string): Promise<Article | null>;
+  update(article: Article): Promise<void>;
+}
+
 export function createArticleRepository(db: Knex) {
   return {
     async insert(article: Article): Promise<void> {

@@ -1,6 +1,6 @@
 import '../src/bootstrap';
 
-import { createDb } from '../src/db';
+import { createDb } from '../src/db/db';
 import { createArticleRepository } from '../src/article/article.repository';
 import { createArticle } from '@socialpublisher/core';
 

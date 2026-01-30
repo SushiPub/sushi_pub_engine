@@ -8,3 +8,7 @@ Repositories are interfaces + implementations.
 	•	Repository tests → DB integration
 
     
+Services are for behavior.
+Repositories are for access.
+Never write through a repository directly.
+Reading is fine.
