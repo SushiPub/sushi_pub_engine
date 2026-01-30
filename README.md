@@ -1,6 +1,6 @@
 ## Social Publisher
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/9ae3582a-c23a-4f12-9f9b-6b5b8189ddea" />
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/14690cf4-b2bc-4b3a-8c3b-34d5fa96afc2" />
 
 
 
