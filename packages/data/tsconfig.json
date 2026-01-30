@@ -6,7 +6,11 @@
     "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "baseUrl": ".",
+    "paths": {
+      "@socialpublisher/core": ["../core/src"]
+    }
   },
   "include": ["src", "tests"]
 }
