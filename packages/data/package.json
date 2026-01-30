@@ -9,7 +9,7 @@
     "migrate": "node -r ts-node/register -r ./src/bootstrap.ts ./node_modules/.bin/knex migrate:latest --knexfile knexfile.ts"
   },
   "dependencies": {
-    "@socialpublisher/core": "file:../core",
+    "@socialpublisher/core": "*",
     "dotenv": "^17.2.3",
     "pg": "^8.17.2"
   },

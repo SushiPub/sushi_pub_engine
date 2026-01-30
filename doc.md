@@ -22,3 +22,6 @@ Data is created by tests / app logic
 
 -knex migrations
 npx knex migrate:make 002_harden_articles
+
+
+//TODO

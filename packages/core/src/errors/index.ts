@@ -1,0 +1,1 @@
+export * from './duplicate-article-slug.error';

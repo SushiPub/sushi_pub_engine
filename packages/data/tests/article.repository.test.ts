@@ -1,7 +1,7 @@
 import '../src/bootstrap';
 
 import { createDb } from '../src/db';
-import { createArticleRepository } from '../src/article.repository';
+import { createArticleRepository } from '../src/article/article.repository';
 import { createArticle } from '@socialpublisher/core';
 
 const db = createDb();
