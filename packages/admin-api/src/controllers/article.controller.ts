@@ -21,7 +21,12 @@ export function createArticleController(
 
     async publish(req: Request, res: Response) {
       try {
-        await articleService.publishArticle(req.params.id);
+        const id = Array.isArray(req.params.id)
+          ? req.params.id[0]
+          : req.params.id;
+
+        await articleService.publishArticle(id);
+
         res.status(204).send();
       } catch (err: any) {
         res.status(400).json({ error: err.message });

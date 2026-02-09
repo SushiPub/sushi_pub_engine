@@ -9,7 +9,7 @@ const articlesRepo = createArticleRepository(db);
 
 beforeAll(async () => {
   // ✅ Ensure schema exists (via migrations)
-  await db.migrate.latest();
+  //await db.migrate.latest();
 });
 
 beforeEach(async () => {

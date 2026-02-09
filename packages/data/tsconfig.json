@@ -1,16 +1,12 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2020",
     "module": "CommonJS",
-    "declaration": true,
+    "rootDir": "src",
     "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "types": ["node", "jest"],
-    "baseUrl": ".",
-    "paths": {
-      "@socialpublisher/core": ["../core/src"]
-    }
+    "declaration": true,
+    "types": ["node", "jest"]
   },
-  "include": ["src", "tests"]
+  "include": ["src"],
+  "exclude": ["tests"]
 }

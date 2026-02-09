@@ -5,9 +5,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "migrate": "node -r ts-node/register -r ./src/bootstrap.ts ./node_modules/.bin/knex migrate:latest --knexfile knexfile.ts"
-  },
+    "pretest": "ts-node src/db/check-db.ts",
+    "test": "npm run migrate && jest",
+    "migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "rollback": "knex migrate:rollback --knexfile knexfile.ts"},
   "dependencies": {
     "@socialpublisher/core": "*",
     "dotenv": "^17.2.3",

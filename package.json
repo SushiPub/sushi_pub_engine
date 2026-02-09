@@ -3,7 +3,10 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "npm run build -w @socialpublisher/core",
-    "test": "npm test -w @socialpublisher/data"
+    "build": "npm run build -ws",
+    "build:core": "npm run build -w @socialpublisher/core",
+    "build:data": "npm run build -w @socialpublisher/data",
+    "build:admin": "npm run build -w @socialpublisher/admin-api",
+    "test": "npm test -ws"
   }
 }

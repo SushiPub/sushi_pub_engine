@@ -2,8 +2,8 @@ import knex, { Knex } from 'knex';
 
 function requireEnv(name: string): string {
   const value = process.env[name];
-  if (!value) {
-    throw new Error(`❌ Missing required env var: ${name}`);
+  if (typeof value !== 'string' || value.length === 0) {
+    throw new Error(`❌ Missing or invalid env var: ${name}`);
   }
   return value;
 }

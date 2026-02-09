@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import { createDb } from './src/db';
+import './src/bootstrap';
 
 // ⚠️ IMPORTANT:
 // This file is used ONLY by CLI & migrations
