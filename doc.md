@@ -24,4 +24,13 @@ Data is created by tests / app logic
 npx knex migrate:make 002_harden_articles
 
 
-//TODO
+C#
+TypeScript
+interface
+interface
+class implements
+function returns ArticleRepository
+Nominal typing
+Structural typing
+Compiler checks at declaration
+Compiler checks at assignment / annotation

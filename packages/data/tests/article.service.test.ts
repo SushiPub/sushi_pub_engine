@@ -13,8 +13,8 @@
  * @module tests/article.service.test
  */
 import { createArticle, InvalidArticleStateError } from '@socialpublisher/core';
-import { ArticleService } from '../src/article/article.service';
-import { createArticleServiceTestFixture } from './fixtures/article-service.fixture';
+import { articleBuilder } from './builders/article.builder';
+import { createTestContext } from './test-context';
 
 jest.mock('../src/db/transaction', () => ({
   withTransaction: async (_db: any, fn: any) => {
@@ -25,30 +25,19 @@ jest.mock('../src/db/transaction', () => ({
 
 
 describe('ArticleService', () => {
-  let service: ArticleService;
-  let repo: any;
-
+  let ctx: ReturnType<typeof createTestContext>;
 
   beforeEach(() => {
-    const fixture = createArticleServiceTestFixture();
-    service = fixture.service;
-    repo = fixture.repo;
+    ctx = createTestContext();
   });
 
   test('creates article when slug is unique', async () => {
 
-    const { service, repo } = createArticleServiceTestFixture();
+    const article = articleBuilder({ status: 'published', slug: 'hello' });
 
-    const article = createArticle({
-      id: '1',
-      title: 'Hello',
-      slug: 'hello',
-      body: 'World',
-    });
+    await ctx.articleService.create(article);
 
-    await service.create(article);
-
-    const stored = await repo.findBySlug('hello');
+    const stored = await ctx.repos.articleRepo.findBySlug('hello');
     expect(stored).not.toBeNull();
   });
 
@@ -61,9 +50,9 @@ describe('ArticleService', () => {
       body: 'World',
     });
 
-    await service.create(article);
+    await ctx.articleService.create(article);
 
-    await expect(service.create(article)).rejects.toThrow(
+    await expect(ctx.articleService.create(article)).rejects.toThrow(
       'already exists'
     );
   });
@@ -78,10 +67,10 @@ describe('ArticleService', () => {
       body: 'content',
     });
 
-    await service.create(article);
-    await service.publishArticle(article.id);
+    await ctx.articleService.create(article);
+    await ctx.articleService.publishArticle(article.id);
 
-    const updated = await repo.findById(article.id);
+    const updated = await ctx.repos.articleRepo.findById(article.id);
 
     expect(updated.status).toBe('published');
     expect(updated.updatedAt).toBeInstanceOf(Date);
@@ -99,10 +88,10 @@ describe('ArticleService', () => {
       status: 'published' as const,
     };
 
-    await repo.insert(article);
+    await ctx.repos.articleRepo.insert(article);
 
     await expect(
-      service.publishArticle(article.id)
+      ctx.articleService.publishArticle(article.id)
     ).rejects.toBeInstanceOf(InvalidArticleStateError);
   });
 });
